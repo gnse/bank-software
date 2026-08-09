@@ -311,10 +311,10 @@ def main_third_option(): #----------------------- Функция вывода с
                     coc_podskazka_check = input('>')
                     if coc_podskazka_check == 'y':
                         main_hint_menu()
-                        continue
+                        break
                     elif coc_podskazka_check == 'n':
                         clear_screen()
-                        continue
+                        break
                     else:
                         print('ОШИБКА - Неверное действие')
                         time.sleep(1)

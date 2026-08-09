@@ -36,10 +36,10 @@ def welcome_panel():  # --------------------------- Функция меню пр
 
 def welcome_login_panel(): #--------------------- Функция входа в систему(1 опция)
     clear_screen()
-    print('-----ТЕРМИНАЛ БАНКА GUSE-----')
-    print('Введите логин и пароль.')
-    print('-----------------------------')
     while True:
+        print('-----ТЕРМИНАЛ БАНКА GUSE-----')
+        print('Введите логин и пароль.')
+        print('-----------------------------')
         login_check = input('Логин>')
         passwrd_check = input('Пароль>')
         if not login_check.isascii() or not passwrd_check.isascii():

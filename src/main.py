@@ -13,7 +13,138 @@ Balance = 1000
 def clear_screen(): #---------------------------- Функция очистки экрана
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def main_add_funds(cash): #---------------------- Функция пополнения баланса
+def welcome_panel():  # --------------------------- Функция меню приветствия
+    clear_screen()
+    while True:
+        print('-----ТЕРМИНАЛ БАНКА GUSE-----')
+        print('::Выберите действие')
+        print('[1] Войти')
+        print('[2] Создать аккаунт')
+        print('[3] Выйти')
+        print('-----------------------------')
+        user_choice = input('>')
+        if user_choice == '1':
+            welcome_login_panel()
+        elif user_choice == '2':
+            authorization_panel()
+        elif user_choice == '3':
+            sys.exit()
+        else:
+            print('ОШИБКА - Неверное действие')
+            clear_screen()
+            break
+
+def welcome_login_panel(): #--------------------- Функция входа в систему(1 опция)
+    clear_screen()
+    print('-----ТЕРМИНАЛ БАНКА GUSE-----')
+    print('Введите логин и пароль.')
+    print('-----------------------------')
+    while True:
+        login_check = input('Логин>')
+        passwrd_check = input('Пароль>')
+        if not login_check.isascii() or not passwrd_check.isascii():
+            print('ОШИБКА - Логин и пароль должны содержать английские символы!')
+            time.sleep(1)
+            clear_screen()
+            continue
+        elif passwrd_check != password or login_check != login:
+            print('ОШИБКА - Неверный логин или пароль')
+            print('Дать подсказку? (y/n)')
+            podskazka_check = input('>')
+            if podskazka_check == 'y':
+                main_hint_menu()
+                continue
+            elif podskazka_check == 'n':
+                clear_screen()
+                continue
+            else:
+                print('ОШИБКА - Неверное действие')
+                time.sleep(1)
+                clear_screen()
+                continue
+        else:
+            main_option_menu()
+
+def authorization_panel(): #--------------------- Функция панели авторизации(2 опция)
+    global login, password
+    clear_screen()
+    while True:
+        print('-----АВТОРИЗАЦИЯ В БАНКЕ GUSE-----')
+        print('::Выберите действие')
+        print('[1] Создать аккаунт')
+        print('[2] Вернутся в меню')
+        print('----------------------------------')
+        user_option_check = input('>')
+        if user_option_check == '1':
+            while True:
+                clear_screen()
+                print('-----АВТОРИЗАЦИЯ В БАНКЕ GUSE-----')
+                print('::Введите логин и пароль для нового аккаунта')
+                print('----------------------------------')
+                user_login_check = input('Логин>')
+                if user_login_check == '' :
+                    print('ОШИБКА - логин должен содержать символы!')
+                    time.sleep(1)
+                    clear_screen()
+                    continue
+                elif not user_login_check.isascii():
+                    print('ОШИБКА - логин должен содержать только английские символы!')
+                    time.sleep(1)
+                    continue
+                elif len(user_login_check) < 3 or len(user_login_check) > 20:
+                    print('ОШИБКА - логин должен быть от 3 до 20 символов!')
+                    time.sleep(1)
+                    clear_screen()
+                    continue
+                elif user_login_check.isspace() or ' ' in user_login_check:
+                    print('ОШИБКА - логин не должен содержать пробелы!')
+                    time.sleep(1)
+                    clear_screen()
+                    continue
+                elif user_login_check.isdigit():
+                    print('ОШИБКА - логин должен содержать буквы помимо цифр!')
+                    time.sleep(1)
+                    clear_screen()
+                    continue
+                else:
+                    print('----------------------------------')
+                    while True:
+                        user_password_check = input('Пароль>')
+                        if user_password_check == '':
+                            print('ОШИБКА - пароль должен содержать символы!')
+                            time.sleep(1)
+                            continue
+                        elif not user_password_check.isascii():
+                            print('ОШИБКА - пароль должен содержать только английские символы!')
+                            time.sleep(1)
+                            continue
+                        elif len(user_password_check) < 3:
+                            print('ОШИБКА - пароль должен быть длиннее 3 символов!')
+                            time.sleep(1)
+                            continue
+                        elif ' ' in user_password_check:
+                            print('ОШИБКА - пароль не должен содержать пробелы!')
+                            time.sleep(1)
+                            continue
+                        else:
+                            login = user_login_check
+                            password = user_password_check
+                            print('Аккаунт создан!')
+                            input('Нажмите любую клавишу что бы продолжить')
+                            clear_screen()
+                            welcome_panel()
+                            return
+
+        elif user_option_check == '2':
+            welcome_panel()
+            return
+        else:
+            print('ОШИБКА - Неверное действие')
+            time.sleep(1)
+            clear_screen()
+            continue
+
+def main_add_funds(cash):  # ---------------------- Функция пополнения баланса
     global Balance
     print('Пополняю баланс...')
     time.sleep(1)
@@ -22,7 +153,7 @@ def main_add_funds(cash): #---------------------- Функция пополне�
     input('Нажмите на любую клавишу что бы продолжить')
     clear_screen()
 
-def main_hint_menu(): #-------------------------- Функция подсказок
+def main_hint_menu():  # -------------------------- Функция подсказок
     clear_screen()
     print('-----ОСОБАЯ ПАНЕЛЬ ПОДСКАЗОК-----')
     print(f'Логин - {login}')
@@ -30,7 +161,7 @@ def main_hint_menu(): #-------------------------- Функция подсказ�
     input('Нажмите любую клавишу для выхода.')
     clear_screen()
 
-def main_option_menu(): #------------------------ Функция выбора действий
+def main_option_menu():  # ------------------------ Функция выбора действий
     clear_screen()
     while True:
         print('-----ТЕРМИНАЛ БАНКА GUSE-----')
@@ -251,32 +382,7 @@ def main_third_option(): #----------------------- Функция вывода с
             clear_screen()
             break
 
-def main_fourth_option(): #---------------------- Функция выхода из терминала(4 действие)
+def main_fourth_option(): #---------------------- Функция выхода(4 действие)
     sys.exit()
 
-#------------------------------------------------ WELCOME-Панель(изначально врубается)
-
-while True:
-    print('-----ТЕРМИНАЛ БАНКА GUSE-----')
-    print('Введите логин и пароль')
-    while True:
-        login_check = input('Логин>')
-        passwrd_check = input('Пароль>')
-        if passwrd_check != password or login_check != login:
-            print('ОШИБКА - Неверный логин или пароль')
-            print('Дать подсказку? (y/n)')
-            podskazka_check = input('>')
-            if podskazka_check == 'y':
-                main_hint_menu()
-                break
-            elif podskazka_check == 'n':
-                clear_screen()
-                break
-            else:
-                print('ОШИБКА - Неверное действие')
-                time.sleep(1)
-                clear_screen()
-                break
-
-        else:
-            main_option_menu()
+welcome_panel()#------------------------------------------------ WELCOME-Панель(изначально врубается)

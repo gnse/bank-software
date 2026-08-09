@@ -241,12 +241,7 @@ def main_second_option(): #---------------------- Функция пополне�
                     print('Дать подсказку? (y/n)')
                     yon_podskazka_check = input('>')
                     if yon_podskazka_check == 'y':
-                        clear_screen()
-                        print('-----ОСОБАЯ ПАНЕЛЬ ПОДСКАЗОК-----')
-                        print(f'Логин - {login}')
-                        print(f'Пароль - {password}')
-                        input('Нажмите любую клавишу для выхода.')
-                        clear_screen()
+                        main_hint_menu()
                         continue
                     elif yon_podskazka_check == 'n':
                         clear_screen()
@@ -384,5 +379,5 @@ def main_third_option(): #----------------------- Функция вывода с
 
 def main_fourth_option(): #---------------------- Функция выхода(4 действие)
     sys.exit()
-
-welcome_panel()#------------------------------------------------ WELCOME-Панель(изначально врубается)
+#------------------------------------------------------------------------------------------ Включение всего этого кода
+welcome_panel()#--------------------------------- WELCOME-Панель(изначально врубается)

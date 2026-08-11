@@ -31,6 +31,7 @@ def welcome_panel():  # --------------------------- Функция меню пр
             sys.exit()
         else:
             print('ОШИБКА - Неверное действие')
+            time.sleep(1)
             clear_screen()
             continue
 

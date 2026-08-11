@@ -32,7 +32,7 @@ def welcome_panel():  # --------------------------- Функция меню пр
         else:
             print('ОШИБКА - Неверное действие')
             clear_screen()
-            break
+            continue
 
 def welcome_login_panel(): #--------------------- Функция входа в систему(1 опция)
     clear_screen()
